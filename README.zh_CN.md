@@ -20,28 +20,20 @@
 [download-image]: https://img.shields.io/npm/dm/egg-cockroach.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-cockroach
 
-<!--
-Description here.
--->
+* cockroachdb 的 eggjs 插件
 
 ## 依赖说明
 
 ### 依赖的 egg 版本
 
-egg-cockroach 版本 | egg 1.x
---- | ---
-1.x | 😁
-0.x | ❌
+| egg-cockroach 版本 | egg 1.x |
+| ---------------- | ------- |
+| 1.x              | 😁      |
 
-### 依赖的插件
-<!--
-
-如果有依赖其它插件，请在这里特别说明。如
-
-- security
-- multipart
-
--->
+## 获取插件
+```shell
+$ npm install egg-cockroach --save
+```
 
 ## 开启插件
 
@@ -53,23 +45,42 @@ exports.cockroach = {
 };
 ```
 
-## 使用场景
+## 配置
 
-- Why and What: 描述为什么会有这个插件，它主要在完成一件什么事情。
-尽可能描述详细。
-- How: 描述这个插件是怎样使用的，具体的示例代码，甚至提供一个完整的示例，并给出链接。
+```javascript
+exports.cockroach = {
+  client: {
+    user: 'root',
+    host: '127.0.0.1',
+    database: 'user',
+    port: 26257,
+  },
+  app: true,
+  agent: false,
+};
+```
 
-## 详细配置
+## 使用
 
-请到 [config/config.default.js](config/config.default.js) 查看详细配置项说明。
+```javascript
+// controller/home.js
+// 目前只做了直接执行 SQL 语句的用法，以后会逐渐完善
+module.exports = app => {
+  class HomeController extends app.Controller {
+    * index() {
+      const conn = yield app.cockroach;
+      conn.query('CREATE TABLE IF NOT EXISTS accounts (id INT PRIMARY KEY, balance INT);');
 
-## 单元测试
-
-<!-- 描述如何在单元测试中使用此插件，例如 schedule 如何触发。无则省略。-->
-
+      console.log(conn);
+      this.ctx.body = 'hi, egg';
+    }
+  }
+  return HomeController;
+};
+```
 ## 提问交流
 
-请到 [egg issues](https://github.com/eggjs/egg/issues) 异步交流。
+请到 [egg-cockroach issues](https://github.com/Txiaozhe/egg-cockroach/issues) 异步交流。
 
 ## License
 
