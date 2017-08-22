@@ -11,12 +11,12 @@ module.exports = app => {
  * @param  {Application} app 当前的应用
  * @return {Object}          返回创建的 Cockroach 实例
  */
-function* createCockroach(config, app) {
+function createCockroach(config, app) {
   const pool = new pg.Pool(config);
 
   app.beforeStart(function* () {
     app.coreLogger.info(`[egg-cockroach] instance status OK ${new Date()}`);
   });
 
-  return yield pool.connect();
+  return pool.connect();
 }
