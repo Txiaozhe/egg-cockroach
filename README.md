@@ -20,7 +20,7 @@
 [download-image]: https://img.shields.io/npm/dm/egg-cockroach.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-cockroach
 
-* cockroachdb 的 eggjs 插件
+* A cockroachdb plugin of eggjs.
 * [GitHub](https://github.com/Txiaozhe/egg-cockroach)
 
 ## Direction
@@ -65,7 +65,7 @@ exports.cockroach = {
 
 ```javascript
 // controller/home.js
-// 目前只做了直接执行 SQL 语句的用法，以后会逐渐完善
+// it is can only execute SQL  Statements now.
 module.exports = app => {
   class HomeController extends app.Controller {
     * index() {
