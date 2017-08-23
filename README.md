@@ -21,6 +21,7 @@
 [download-url]: https://npmjs.org/package/egg-cockroach
 
 * cockroachdb 的 eggjs 插件
+* [GitHub](https://github.com/Txiaozhe/egg-cockroach)
 
 ## Direction
 
