@@ -1,6 +1,6 @@
 {
   "name": "egg-cockroach",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A CockroachDB plugin for eggjs.",
   "eggPlugin": {
     "name": "cockroach"
@@ -40,7 +40,8 @@
   "files": [
     "config",
     "agent.js",
-    "app.js"
+    "app.js",
+    "lib"
   ],
   "ci": {
     "version": "6, 8"
