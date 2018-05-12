@@ -27,9 +27,9 @@
 
 ### egg version
 
-| egg-cockroach | egg 1.x |
+| egg-cockroach | egg 2.x |
 | ------------- | ------- |
-| 1.x           | 😁      |
+| 2.x           | 😁      |
 
 ## Get
 ```shell

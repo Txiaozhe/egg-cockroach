@@ -27,9 +27,9 @@
 
 ### 依赖的 egg 版本
 
-| egg-cockroach 版本 | egg 1.x |
+| egg-cockroach 版本 | egg 2.x |
 | ---------------- | ------- |
-| 1.x              | 😁      |
+| 2.x              | 😁      |
 
 ## 获取插件
 ```shell
@@ -66,18 +66,21 @@ exports.cockroach = {
 ```javascript
 // controller/home.js
 // 目前只做了直接执行 SQL 语句的用法，以后会逐渐完善
-module.exports = app => {
-  class HomeController extends app.Controller {
-    * index() {
-      const conn = yield app.cockroach;
-      conn.query('CREATE TABLE IF NOT EXISTS accounts (id INT PRIMARY KEY, balance INT);');
-
-      console.log(conn);
-      this.ctx.body = 'hi, egg';
+class HomeController extends Controller {
+  async index() {
+    const [err, conn, done] = await this.app.cockroach;
+    if(err) {
+      console.log(err);
+    } else {
+      const time = await conn.query('select now() as currentTime;');
+      console.log(time.rows[0].currenttime);
+      const res = await conn.query('SELECT * FROM accounts;');
+      console.log(res);
+      await done();
     }
+    this.ctx.body = 'hi, egg';
   }
-  return HomeController;
-};
+}
 ```
 ## 提问交流
 
