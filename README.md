@@ -66,18 +66,21 @@ exports.cockroach = {
 ```javascript
 // controller/home.js
 // it is can only execute SQL  Statements now.
-module.exports = app => {
-  class HomeController extends app.Controller {
-    * index() {
-      const conn = yield app.cockroach;
-      conn.query('CREATE TABLE IF NOT EXISTS accounts (id INT PRIMARY KEY, balance INT);');
-
-      console.log(conn);
-      this.ctx.body = 'hi, egg';
+class HomeController extends Controller {
+  async index() {
+    const [err, conn, done] = await this.app.cockroach;
+    if(err) {
+      console.log(err)
+    } else {
+      const time = await conn.query('select now() as currentTime;');
+      console.log(time.rows[0].currenttime);
+      const res = await conn.query('SELECT * FROM accounts;');
+      console.log(res);
+      await done();
     }
+    this.ctx.body = 'hi, egg';
   }
-  return HomeController;
-};
+}
 ```
 ## Q & A
 
