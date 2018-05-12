@@ -70,7 +70,7 @@ class HomeController extends Controller {
   async index() {
     const [err, conn, done] = await this.app.cockroach;
     if(err) {
-      console.log(err)
+      console.log(err);
     } else {
       const time = await conn.query('select now() as currentTime;');
       console.log(time.rows[0].currenttime);
